@@ -124,6 +124,10 @@ class Postartify {
 
 		$this->loader = new Postartify_Loader();
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-postartify-cpt.php';
+
+		require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/class-postartify-main.php';		
+
 	}
 
 	/**
@@ -153,10 +157,31 @@ class Postartify {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Postartify_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_cpt = new Postartify_CPT();
+		$plugin_main = new Postartify_Main();
+		
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		// Enable All cpt thumbnail
+		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'enable_featured_image' );
+
+		// CPT Register
+		$this->loader->add_action( 'init', $plugin_cpt, 'register_cpt' );
+		
+		// admin Menu 
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
+		//
+		$this->loader->add_action('admin_init',$plugin_main ,'register_settings');
+
+		$this->loader->add_action('admin_enqueue_scripts',$plugin_main,'enqueue_admin_scripts');
+		$this->loader->add_action('add_meta_boxes',$plugin_main,'add_meta_boxes');
+        $this->loader->add_action('wp_ajax_aiig_generate_featured',$plugin_main, 'ajax_generate_featured');
+        $this->loader->add_action('wp_ajax_aiig_generate_inline',$plugin_main, 'ajax_generate_inline');
+        $this->loader->add_action('wp_ajax_aiig_analyze_post',$plugin_main, 'ajax_analyze_post');
+        $this->loader->add_action('wp_ajax_aiig_batch_generate',$plugin_main, 'ajax_batch_generate');
+        $this->loader->add_action('save_post',$plugin_main, 'auto_generate_featured', 10, 3);
 	}
 
 	/**
@@ -215,4 +240,5 @@ class Postartify {
 		return $this->version;
 	}
 
+	
 }
