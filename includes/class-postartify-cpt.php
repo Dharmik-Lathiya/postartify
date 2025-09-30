@@ -8,10 +8,10 @@
 
 class Postartify_CPT {
 
-    public function register_cpt(){
-        register_post_type(
-            'portfolio',
-            array(
+	public function register_cpt() {
+		register_post_type(
+			'portfolio',
+			array(
 				'labels'      => array(
 					'name'          => __( 'Portfolio' ),
 					'singular_name' => __( 'Portfolio' ),
@@ -27,8 +27,6 @@ class Postartify_CPT {
 				'supports'    => array( 'title', 'editor', 'thumbnail', 'comments' ),
 				'menu_icon'   => 'dashicons-portfolio',
 			)
-        );
-
-    }
-
+		);
+	}
 }

@@ -77,6 +77,5 @@ function run_postartify() {
 
 	$plugin = new Postartify();
 	$plugin->run();
-
 }
 run_postartify();

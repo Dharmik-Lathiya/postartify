@@ -78,7 +78,6 @@ class Postartify {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -103,31 +102,30 @@ class Postartify {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-postartify-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-postartify-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-postartify-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-postartify-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-postartify-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-postartify-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-postartify-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-postartify-public.php';
 
 		$this->loader = new Postartify_Loader();
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-postartify-cpt.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-postartify-cpt.php';
 
-		require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/class-postartify-main.php';		
-
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-postartify-main.php';
 	}
 
 	/**
@@ -144,7 +142,6 @@ class Postartify {
 		$plugin_i18n = new Postartify_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -157,9 +154,8 @@ class Postartify {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Postartify_Admin( $this->get_plugin_name(), $this->get_version() );
-		$plugin_cpt = new Postartify_CPT();
-		$plugin_main = new Postartify_Main();
-		
+		$plugin_cpt   = new Postartify_CPT();
+		$plugin_main  = new Postartify_Main();
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -169,19 +165,18 @@ class Postartify {
 
 		// CPT Register
 		$this->loader->add_action( 'init', $plugin_cpt, 'register_cpt' );
-		
-		// admin Menu 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
-		//
-		$this->loader->add_action('admin_init',$plugin_main ,'register_settings');
 
-		$this->loader->add_action('admin_enqueue_scripts',$plugin_main,'enqueue_admin_scripts');
-		$this->loader->add_action('add_meta_boxes',$plugin_main,'add_meta_boxes');
-        $this->loader->add_action('wp_ajax_aiig_generate_featured',$plugin_main, 'ajax_generate_featured');
-        $this->loader->add_action('wp_ajax_aiig_generate_inline',$plugin_main, 'ajax_generate_inline');
-        $this->loader->add_action('wp_ajax_aiig_analyze_post',$plugin_main, 'ajax_analyze_post');
-        $this->loader->add_action('wp_ajax_aiig_batch_generate',$plugin_main, 'ajax_batch_generate');
-        $this->loader->add_action('save_post',$plugin_main, 'auto_generate_featured', 10, 3);
+		// admin Menu
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
+				$this->loader->add_action( 'admin_init', $plugin_main, 'register_settings' );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_main, 'enqueue_admin_scripts' );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_main, 'add_meta_boxes' );
+		$this->loader->add_action( 'wp_ajax_aiig_generate_featured', $plugin_main, 'ajax_generate_featured' );
+		$this->loader->add_action( 'wp_ajax_aiig_generate_inline', $plugin_main, 'ajax_generate_inline' );
+		$this->loader->add_action( 'wp_ajax_aiig_analyze_post', $plugin_main, 'ajax_analyze_post' );
+		$this->loader->add_action( 'wp_ajax_aiig_batch_generate', $plugin_main, 'ajax_batch_generate' );
+		$this->loader->add_action( 'save_post', $plugin_main, 'auto_generate_featured', 10, 3 );
 	}
 
 	/**
@@ -197,7 +192,6 @@ class Postartify {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -239,6 +233,4 @@ class Postartify {
 	public function get_version() {
 		return $this->version;
 	}
-
-	
 }

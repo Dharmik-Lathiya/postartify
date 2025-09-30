@@ -46,14 +46,13 @@ class Postartify_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
+		$this->version     = $version;
 	}
 
 	/**
@@ -76,7 +75,6 @@ class Postartify_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/postartify-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -99,53 +97,51 @@ class Postartify_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/postartify-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 	/**
 	 * Enable Fetured Image
 	 */
-	public function enable_featured_image(){
-		add_theme_support('post-thumbnails');
+	public function enable_featured_image() {
+		add_theme_support( 'post-thumbnails' );
 	}
 
 	public function myprefix_add_custom_box() {
-        $screens = ['post', 'page', 'portfolio']; 
-        foreach ($screens as $screen) {
-            add_meta_box(
-                'myprefix_box_id', // Unique ID
-                'My Custom Box Title', // Box title
-                'myprefix_custom_box_html', // Callback function to render content
-                $screen, // Post type
-                'normal', // Context (e.g., 'normal', 'advanced', 'side')
-                'high' // Priority		
-            );
-        }
-    }
+		$screens = array( 'post', 'page', 'portfolio' );
+		foreach ( $screens as $screen ) {
+			add_meta_box(
+				'myprefix_box_id', // Unique ID
+				'My Custom Box Title', // Box title
+				'myprefix_custom_box_html', // Callback function to render content
+				$screen, // Post type
+				'normal', // Context (e.g., 'normal', 'advanced', 'side')
+				'high' // Priority
+			);
+		}
+	}
 
 	public function add_admin_menu() {
-        add_menu_page(
-            'Postartify AI Image Generator',
-            'Postartify',
-            'manage_options',
-            'postartify-ai-image-generator',
-            function () {
+		add_menu_page(
+			'Postartify AI Image Generator',
+			'Postartify',
+			'manage_options',
+			'postartify-ai-image-generator',
+			function () {
 				include_once plugin_dir_path( __DIR__ ) . 'admin/partials/postartify-admin-dashboard.php';
 			},
-            'dashicons-format-image',
-            30
-        );
-        
-        add_submenu_page(
-            'postartify-ai-image-generator',
-            'Batch Generate',
-            'Batch Generate',
-            'manage_options',
-            'ai-image-batch',
-            function () {
+			'dashicons-format-image',
+			30
+		);
+
+		add_submenu_page(
+			'postartify-ai-image-generator',
+			'Batch Generate',
+			'Batch Generate',
+			'manage_options',
+			'ai-image-batch',
+			function () {
 				include_once plugin_dir_path( __DIR__ ) . 'admin/partials/postartify-admin-batch.php';
 			},
-        );
-    }
-
+		);
+	}
 }

@@ -3,312 +3,312 @@
  * included in this file.
  */
 
- /* AI Image Generator Plugin Styles */
+/* AI Image Generator Plugin Styles */
 
 /* Meta Box Styles */
 .aiig-meta-box {
-    padding: 10px 0;
+	padding: 10px 0;
 }
 
 .aiig-section {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ddd;
 }
 
 .aiig-section:last-child {
-    border-bottom: none;
+	border-bottom: none;
 }
 
 .aiig-section h4 {
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: #1d2327;
+	margin: 0 0 10px 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: #1d2327;
 }
 
 .aiig-status {
-    margin: 10px 0;
-    font-size: 13px;
+	margin: 10px 0;
+	font-size: 13px;
 }
 
 .aiig-generate-featured,
 .aiig-analyze-post {
-    width: 100%;
-    margin-top: 5px;
+	width: 100%;
+	margin-top: 5px;
 }
 
 .aiig-loading {
-    text-align: center;
-    padding: 20px 0;
+	text-align: center;
+	padding: 20px 0;
 }
 
 .aiig-loading .spinner {
-    float: none;
-    margin: 0 auto;
+	float: none;
+	margin: 0 auto;
 }
 
 .aiig-suggestions {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
 .aiig-suggestion-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .aiig-suggestion-list li {
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #f6f7f7;
-    border-radius: 4px;
+	margin-bottom: 15px;
+	padding: 10px;
+	background: #f6f7f7;
+	border-radius: 4px;
 }
 
 .aiig-suggestion-list strong {
-    display: block;
-    margin-bottom: 8px;
-    color: #2c3338;
+	display: block;
+	margin-bottom: 8px;
+	color: #2c3338;
 }
 
 .aiig-suggestion-list button {
-    margin-top: 5px;
+	margin-top: 5px;
 }
 
 .aiig-generated-preview {
-    margin-top: 10px;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+	margin-top: 10px;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
 }
 
 .aiig-generated-preview img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
 }
 
 .aiig-insert-image {
-    display: inline-block;
-    padding: 5px 10px;
-    background: #2271b1;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 3px;
-    font-size: 12px;
+	display: inline-block;
+	padding: 5px 10px;
+	background: #2271b1;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 3px;
+	font-size: 12px;
 }
 
 .aiig-insert-image:hover {
-    background: #135e96;
-    color: #fff;
+	background: #135e96;
+	color: #fff;
 }
 
 /* Settings Page Styles */
 .aiig-style-examples {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 15px;
+	margin-top: 20px;
 }
 
 .style-card {
-    padding: 15px;
-    background: #f6f7f7;
-    border-left: 4px solid #2271b1;
-    border-radius: 4px;
+	padding: 15px;
+	background: #f6f7f7;
+	border-left: 4px solid #2271b1;
+	border-radius: 4px;
 }
 
 .style-card strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #1d2327;
-    font-size: 14px;
+	display: block;
+	margin-bottom: 5px;
+	color: #1d2327;
+	font-size: 14px;
 }
 
 /* Batch Generation Page Styles */
 .aiig-batch-container {
-    background: #fff;
-    padding: 20px;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    margin: 20px 0;
+	background: #fff;
+	padding: 20px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	margin: 20px 0;
 }
 
 .aiig-batch-info {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .aiig-batch-info p {
-    font-size: 14px;
-    line-height: 1.6;
+	font-size: 14px;
+	line-height: 1.6;
 }
 
 .aiig-start-batch {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .aiig-batch-progress {
-    margin-top: 30px;
-    padding: 20px;
-    background: #f6f7f7;
-    border-radius: 4px;
+	margin-top: 30px;
+	padding: 20px;
+	background: #f6f7f7;
+	border-radius: 4px;
 }
 
 .aiig-batch-progress h3 {
-    margin: 0 0 15px 0;
-    font-size: 16px;
+	margin: 0 0 15px 0;
+	font-size: 16px;
 }
 
 .aiig-progress-bar {
-    height: 30px;
-    background: #fff;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 10px;
+	height: 30px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	overflow: hidden;
+	margin-bottom: 10px;
 }
 
 .aiig-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #2271b1, #135e96);
-    transition: width 0.3s ease;
-    width: 0%;
+	height: 100%;
+	background: linear-gradient(90deg, #2271b1, #135e96);
+	transition: width 0.3s ease;
+	width: 0%;
 }
 
 .aiig-progress-text {
-    margin: 10px 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #1d2327;
+	margin: 10px 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1d2327;
 }
 
 .aiig-batch-log {
-    margin-top: 20px;
-    padding: 15px;
-    background: #fff;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    max-height: 300px;
-    overflow-y: auto;
+	margin-top: 20px;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	max-height: 300px;
+	overflow-y: auto;
 }
 
 .aiig-batch-log p {
-    margin: 5px 0;
-    font-size: 13px;
-    line-height: 1.4;
+	margin: 5px 0;
+	font-size: 13px;
+	line-height: 1.4;
 }
 
 .aiig-batch-log .success {
-    color: #00a32a;
+	color: #00a32a;
 }
 
 .aiig-batch-log .error {
-    color: #d63638;
+	color: #d63638;
 }
 
 .aiig-batch-status {
-    font-size: 13px;
+	font-size: 13px;
 }
 
 /* Post List Table */
 .wp-list-table tbody tr[data-post-id] {
-    transition: background-color 0.2s ease;
+	transition: background-color 0.2s ease;
 }
 
 .wp-list-table tbody tr[data-post-id]:hover {
-    background-color: #f6f7f7;
+	background-color: #f6f7f7;
 }
 
 /* Notices */
 .notice.aiig-notice {
-    margin: 15px 0;
+	margin: 15px 0;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 782px) {
-    .aiig-style-examples {
-        grid-template-columns: 1fr;
-    }
-    
-    .aiig-generate-featured,
-    .aiig-analyze-post {
-        padding: 10px;
-        height: auto;
-    }
+	.aiig-style-examples {
+		grid-template-columns: 1fr;
+	}
+
+	.aiig-generate-featured,
+	.aiig-analyze-post {
+		padding: 10px;
+		height: auto;
+	}
 }
 
 /* Animation for Loading States */
 @keyframes aiig-pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
 }
 
 .aiig-loading {
-    animation: aiig-pulse 1.5s ease-in-out infinite;
+	animation: aiig-pulse 1.5s ease-in-out infinite;
 }
 
 /* Button States */
 .aiig-generate-inline.button-primary {
-    background: #00a32a;
-    border-color: #00a32a;
+	background: #00a32a;
+	border-color: #00a32a;
 }
 
 .aiig-generate-inline.button-primary:hover {
-    background: #008a20;
-    border-color: #008a20;
+	background: #008a20;
+	border-color: #008a20;
 }
 
 /* Tooltips */
 .aiig-tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: help;
-    border-bottom: 1px dotted #666;
+	position: relative;
+	display: inline-block;
+	cursor: help;
+	border-bottom: 1px dotted #666;
 }
 
 .aiig-tooltip:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 12px;
-    background: #1d2327;
-    color: #fff;
-    font-size: 12px;
-    white-space: nowrap;
-    border-radius: 4px;
-    z-index: 1000;
-    margin-bottom: 5px;
+	content: attr(data-tooltip);
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 8px 12px;
+	background: #1d2327;
+	color: #fff;
+	font-size: 12px;
+	white-space: nowrap;
+	border-radius: 4px;
+	z-index: 1000;
+	margin-bottom: 5px;
 }
 
 /* Success/Error States */
 .aiig-success-message {
-    padding: 10px;
-    background: #d7f0d7;
-    border-left: 4px solid #00a32a;
-    border-radius: 4px;
-    margin: 10px 0;
+	padding: 10px;
+	background: #d7f0d7;
+	border-left: 4px solid #00a32a;
+	border-radius: 4px;
+	margin: 10px 0;
 }
 
 .aiig-error-message {
-    padding: 10px;
-    background: #f8d7da;
-    border-left: 4px solid #d63638;
-    border-radius: 4px;
-    margin: 10px 0;
+	padding: 10px;
+	background: #f8d7da;
+	border-left: 4px solid #d63638;
+	border-radius: 4px;
+	margin: 10px 0;
 }
 
 /* Image Preview in Meta Box */
 .aiig-meta-box img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
