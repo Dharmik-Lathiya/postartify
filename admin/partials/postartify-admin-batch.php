@@ -1,7 +1,7 @@
 <?php
 	$posts_without_thumbnails = get_posts(
 		array(
-			'post_type'      => 'service',
+			'post_type'      => 'post',
 			'posts_per_page' => -1,
 			'meta_query'     => array(
 				array(
@@ -16,12 +16,12 @@
 		<div class="wrap">
 			<h1>Batch Generate Featured Images</h1>
 			
-			<div class="aiig-batch-container">
-				<div class="aiig-batch-info">
+			<div class="postartify-batch-container">
+				<div class="postartify-batch-info">
 					<p><strong>Found <?php echo count( $posts_without_thumbnails ); ?> posts without featured images.</strong></p>
 					<?php if ( count( $posts_without_thumbnails ) > 0 ) : ?>
 						<p>This will generate featured images for all posts that don't have one.</p>
-						<button type="button" class="button button-primary aiig-start-batch" data-count="<?php echo count( $posts_without_thumbnails ); ?>">
+						<button type="button" class="button button-primary postartify-start-batch" data-count="<?php echo count( $posts_without_thumbnails ); ?>">
 							Generate All Featured Images
 						</button>
 					<?php else : ?>
@@ -29,13 +29,13 @@
 					<?php endif; ?>
 				</div>
 				
-				<div class="aiig-batch-progress" style="display:none;">
+				<div class="postartify-batch-progress" style="display:none;">
 					<h3>Generation Progress</h3>
-					<div class="aiig-progress-bar">
-						<div class="aiig-progress-fill"></div>
+					<div class="postartify-progress-bar">
+						<div class="postartify-progress-fill"></div>
 					</div>
-					<p class="aiig-progress-text">0 of <?php echo count( $posts_without_thumbnails ); ?> completed</p>
-					<div class="aiig-batch-log"></div>
+					<p class="postartify-progress-text">0 of <?php echo count( $posts_without_thumbnails ); ?> completed</p>
+					<div class="postartify-batch-log"></div>
 				</div>
 			</div>
 			
@@ -59,7 +59,7 @@
 								</a>
 							</td>
 							<td><?php echo get_the_date( '', $post->ID ); ?></td>
-							<td class="aiig-batch-status">Pending</td>
+							<td class="postartify-batch-status">Pending</td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

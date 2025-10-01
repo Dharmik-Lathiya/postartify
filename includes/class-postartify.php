@@ -172,10 +172,10 @@ class Postartify {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_main, 'enqueue_admin_scripts' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_main, 'add_meta_boxes' );
-		$this->loader->add_action( 'wp_ajax_aiig_generate_featured', $plugin_main, 'ajax_generate_featured' );
-		$this->loader->add_action( 'wp_ajax_aiig_generate_inline', $plugin_main, 'ajax_generate_inline' );
-		$this->loader->add_action( 'wp_ajax_aiig_analyze_post', $plugin_main, 'ajax_analyze_post' );
-		$this->loader->add_action( 'wp_ajax_aiig_batch_generate', $plugin_main, 'ajax_batch_generate' );
+		$this->loader->add_action( 'wp_ajax_postartify_generate_featured', $plugin_main, 'ajax_generate_featured' );
+		$this->loader->add_action( 'wp_ajax_postartify_generate_inline', $plugin_main, 'ajax_generate_inline' );
+		$this->loader->add_action( 'wp_ajax_postartify_analyze_post', $plugin_main, 'ajax_analyze_post' );
+		$this->loader->add_action( 'wp_ajax_postartify_batch_generate', $plugin_main, 'ajax_batch_generate' );
 		$this->loader->add_action( 'save_post', $plugin_main, 'auto_generate_featured', 10, 3 );
 	}
 

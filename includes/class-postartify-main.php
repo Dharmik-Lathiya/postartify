@@ -5,15 +5,14 @@ class Postartify_Main {
 	private $default_style;
 
 	public function __construct() {
-		// Initialize default style
-		$this->default_style = get_option( 'aiig_default_style', 'minimal' );
+		$this->default_style = get_option( 'postartify_default_style', 'minimal' );
 	}
 
 	public function register_settings() {
-		register_setting( 'aiig_settings', 'aiig_default_style' );
-		register_setting( 'aiig_settings', 'aiig_auto_generate' );
-		register_setting( 'aiig_settings', 'aiig_image_width' );
-		register_setting( 'aiig_settings', 'aiig_image_height' );
+		register_setting( 'postartify_settings', 'postartify_default_style' );
+		register_setting( 'postartify_settings', 'postartify_auto_generate' );
+		register_setting( 'postartify_settings', 'postartify_image_width' );
+		register_setting( 'postartify_settings', 'postartify_image_height' );
 	}
 
 	/**
@@ -21,27 +20,24 @@ class Postartify_Main {
 	 */
 	public function enqueue_admin_scripts( $hook ) {
 		if ( strpos( $hook, 'ai-image' ) !== false || $hook === 'post.php' || $hook === 'post-new.php' ) {
-			wp_enqueue_style( 'aiig-admin-css', plugin_dir_url( __DIR__ ) . 'admin/css/admin.css', array(), '1.0.0' );
-			wp_enqueue_script( 'aiig-admin-js', plugin_dir_url( __DIR__ ) . 'admin/js/admin.js', array( 'jquery' ), '1.0.0', true );
+			wp_enqueue_style( 'postartify-admin-css', plugin_dir_url( __DIR__ ) . 'admin/css/admin.css', array(), '1.0.0' );
+			wp_enqueue_script( 'postartify-admin-js', plugin_dir_url( __DIR__ ) . 'admin/js/admin.js', array( 'jquery' ), '1.0.0', true );
 
 			wp_localize_script(
-				'aiig-admin-js',
-				'aiigData',
+				'postartify-admin-js',
+				'postartifyData',
 				array(
 					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-					'nonce'   => wp_create_nonce( 'aiig_nonce' ),
+					'nonce'   => wp_create_nonce( 'postartify_nonce' ),
 					'postId'  => get_the_ID(),
 				)
 			);
 		}
 	}
 
-	/**
-	 * Add meta boxes to post editor
-	 */
 	public function add_meta_boxes() {
 		add_meta_box(
-			'aiig_generator',
+			'postartify_generator',
 			'AI Image Generator',
 			array( $this, 'render_meta_box' ),
 			array( 'post', 'page' ),
@@ -54,31 +50,23 @@ class Postartify_Main {
 	 * Render meta box in post editor
 	 */
 	public function render_meta_box( $post ) {
-		wp_nonce_field( 'aiig_meta_box', 'aiig_meta_box_nonce' );
+		wp_nonce_field( 'postartify_meta_box', 'postartify_meta_box_nonce' );
 		$has_thumbnail = has_post_thumbnail( $post->ID );
 		?>
-		<div class="aiig-meta-box">
-			<div class="aiig-section">
+		<div class="postartify-meta-box">
+			<div class="postartify-section">
 				<h4>Featured Image</h4>
 				<?php if ( $has_thumbnail ) : ?>
-					<p class="aiig-status">✓ Featured image exists</p>
+					<p class="postartify-status">✓ Featured image exists</p>
 				<?php else : ?>
-					<p class="aiig-status">⚠ No featured image</p>
+					<p class="postartify-status">⚠ No featured image</p>
 				<?php endif; ?>
-				<button type="button" class="button button-primary aiig-generate-featured" data-post-id="<?php echo $post->ID; ?>">
+				<button type="button" class="button button-primary postartify-generate-featured" data-post-id="<?php echo $post->ID; ?>">
 					<?php echo $has_thumbnail ? 'Regenerate' : 'Generate'; ?> Featured Image
 				</button>
 			</div>
 			
-			<div class="aiig-section">
-				<h4>Inline Suggestions</h4>
-				<button type="button" class="button aiig-analyze-post" data-post-id="<?php echo $post->ID; ?>">
-					Analyze Post for Images
-				</button>
-				<div class="aiig-suggestions"></div>
-			</div>
-			
-			<div class="aiig-loading" style="display:none;">
+			<div class="postartify-loading" style="display:none;">
 				<span class="spinner is-active"></span>
 				<p>Generating image...</p>
 			</div>
@@ -91,7 +79,7 @@ class Postartify_Main {
 	 */
 	public function auto_generate_featured( $post_id, $post, $update ) {
 		// Check if auto-generate is enabled
-		if ( ! get_option( 'aiig_auto_generate' ) ) {
+		if ( ! get_option( 'postartify_auto_generate' ) ) {
 			return;
 		}
 
@@ -118,7 +106,7 @@ class Postartify_Main {
 	 * AJAX: Generate featured image
 	 */
 	public function ajax_generate_featured() {
-		check_ajax_referer( 'aiig_nonce', 'nonce' );
+		check_ajax_referer( 'postartify_nonce', 'nonce' );
 
 		$post_id = intval( $_POST['post_id'] );
 
@@ -141,33 +129,15 @@ class Postartify_Main {
 	}
 
 	/**
-	 * AJAX: Analyze post for inline image suggestions
-	 */
-	public function ajax_analyze_post() {
-		check_ajax_referer( 'aiig_nonce', 'nonce' );
-
-		$post_id = intval( $_POST['post_id'] );
-		$post    = get_post( $post_id );
-
-		if ( ! $post ) {
-			wp_send_json_error( 'Post not found' );
-		}
-
-		$suggestions = $this->analyze_post_content( $post->post_content );
-
-		wp_send_json_success( $suggestions );
-	}
-
-	/**
 	 * AJAX: Generate inline image
 	 */
 	public function ajax_generate_inline() {
-		check_ajax_referer( 'aiig_nonce', 'nonce' );
+		check_ajax_referer( 'postartify_nonce', 'nonce' );
 
 		$prompt  = sanitize_text_field( $_POST['prompt'] );
 		$post_id = intval( $_POST['post_id'] );
 
-		$result = $this->generate_image( $prompt, 'inline-' . $post_id );
+		$result = $this->generate_with_pollinations( $prompt, 'inline-' . $post_id );
 
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error( $result->get_error_message() );
@@ -185,7 +155,7 @@ class Postartify_Main {
 	 * AJAX: Batch generate images
 	 */
 	public function ajax_batch_generate() {
-		check_ajax_referer( 'aiig_nonce', 'nonce' );
+		check_ajax_referer( 'postartify_nonce', 'nonce' );
 
 		if ( ! isset( $_POST['post_ids'] ) ) {
 			wp_send_json_error( 'No post IDs provided' );
@@ -227,13 +197,12 @@ class Postartify_Main {
 		$prompt = $this->create_prompt( $title, $excerpt );
 
 		// Generate image
-		$attachment_id = $this->generate_image( $prompt, 'featured-' . $post_id );
+		$attachment_id = $this->generate_with_pollinations( $prompt, 'featured-' . $post_id );
 
 		if ( is_wp_error( $attachment_id ) ) {
 			return $attachment_id;
 		}
 
-		// Set as featured image
 		set_post_thumbnail( $post_id, $attachment_id );
 
 		return $attachment_id;
@@ -269,21 +238,12 @@ class Postartify_Main {
 		return isset( $styles[ $style ] ) ? $styles[ $style ] : $styles['minimal'];
 	}
 
-	/**
-	 * Generate image using AI API
-	 */
-	private function generate_image( $prompt, $prefix = '' ) {
-		return $this->generate_with_pollinations( $prompt, $prefix );
-	}
-
 	private function generate_with_pollinations( $prompt, $prefix ) {
-		$width  = get_option( 'aiig_image_width', 1024 );
-		$height = get_option( 'aiig_image_height', 1024 );
+		$width  = get_option( 'postartify_image_width', 1024 );
+		$height = get_option( 'postartify_image_height', 1024 );
 
-		// Build Pollinations API URL
 		$query = urlencode( $prompt . ' | ' . $width . 'x' . $height );
 
-		error_log( 'Pollinations Query: ' . $query );
 		$image_url = 'https://image.pollinations.ai/prompt/' . $query;
 
 		// Save to WordPress Media Library
@@ -317,45 +277,11 @@ class Postartify_Main {
 		}
 
 		// Add metadata
-		update_post_meta( $id, '_aiig_generated', 1 );
-		update_post_meta( $id, '_aiig_prompt', $description );
-		update_post_meta( $id, '_aiig_style', $this->default_style );
-		update_post_meta( $id, '_aiig_date', current_time( 'mysql' ) );
+		update_post_meta( $id, '_postartify_generated', 1 );
+		update_post_meta( $id, '_postartify_prompt', $description );
+		update_post_meta( $id, '_postartify_style', $this->default_style );
+		update_post_meta( $id, '_postartify_date', current_time( 'mysql' ) );
 
 		return $id;
-	}
-
-	/**
-	 * Analyze post content for image suggestions
-	 */
-	private function analyze_post_content( $content ) {
-		$suggestions = array();
-
-		// Look for headings
-		preg_match_all( '/<h[2-3][^>]*>(.*?)<\/h[2-3]>/i', $content, $headings );
-
-		foreach ( $headings[1] as $i => $heading ) {
-			$suggestions[] = array(
-				'type'     => 'heading',
-				'text'     => strip_tags( $heading ),
-				'prompt'   => 'Illustration for: ' . strip_tags( $heading ),
-				'position' => $i,
-			);
-		}
-
-		// Look for lists
-		preg_match_all( '/<(ul|ol)[^>]*>.*?<\/\1>/is', $content, $lists );
-
-		if ( count( $lists[0] ) > 0 ) {
-			$suggestions[] = array(
-				'type'     => 'list',
-				'text'     => 'List section',
-				'prompt'   => 'Illustration for a list or checklist',
-				'position' => 0,
-			);
-		}
-
-		// Limit suggestions
-		return array_slice( $suggestions, 0, 5 );
 	}
 }
